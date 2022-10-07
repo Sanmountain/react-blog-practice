@@ -10,7 +10,7 @@ function App() {
     "강남 우동 맛집",
     "파이썬 독학",
   ]);
-  let [따봉, bestchange] = useState(0);
+  let [따봉, bestchange] = useState([0, 0, 0]);
 
   //let num = [1, 2];
   //let [a, c] = [1, 2];
@@ -43,7 +43,7 @@ function App() {
         제목수정
       </button>
 
-      <div className="list">
+      {/* <div className="list">
         <h4>
           {글제목[0]}{" "}
           <span
@@ -71,19 +71,46 @@ function App() {
           {글제목[2]}
         </h4>
         <p>2월 17일 발행</p>
-      </div>
+      </div> */}
 
-      {modal == true ? <Modal></Modal> : null}
+      {글제목.map(function (a, i) {
+        return (
+          <div className="list">
+            <h4
+              onClick={() => {
+                setModal(!modal);
+              }}
+            >
+              {글제목[i]}
+              <span
+                onClick={() => {
+                  let copy = [...따봉];
+                  copy[i] = copy[i] + 1;
+                  bestchange(copy);
+                }}
+              >
+                👍
+              </span>
+              {따봉[i]}
+            </h4>
+            <p>2월 17일 발행</p>
+          </div>
+        );
+      })}
+      {modal == true ? (
+        <Modal titlechange={titlechange} 글제목={글제목} />
+      ) : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-      <h4>제목</h4>
+      <h4>{props.글제목[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button>글수정</button>
     </div>
   );
 }

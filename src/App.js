@@ -1,7 +1,8 @@
 /* eslint-disable */
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { useState } from "react";
+import Signup from "./Pages/Signup";
 
 function App() {
   let post = "강남 우동 맛집";
@@ -18,32 +19,36 @@ function App() {
   let [modal, setModal] = useState(false);
 
   return (
-    <div className="App">
-      <div className="black-nav">
-        <h4 style={{ color: "white", fontSize: "16px" }}>ReactBlog</h4>
-      </div>
+    <Router>
+      <Routes>
+        <Route path="signup" element={<Signup />} />
+      </Routes>
+      <div className="App">
+        <div className="black-nav">
+          <h4 style={{ color: "white", fontSize: "16px" }}>ReactBlog</h4>
+        </div>
 
-      <button
-        onClick={() => {
-          let copy2 = [...글제목];
-          copy2.sort();
-          titlechange(copy2);
-        }}
-      >
-        가나다순정렬
-      </button>
+        <button
+          onClick={() => {
+            let copy2 = [...글제목];
+            copy2.sort();
+            titlechange(copy2);
+          }}
+        >
+          가나다순정렬
+        </button>
 
-      <button
-        onClick={() => {
-          let copy = [...글제목];
-          copy[0] = "여자코트 추천";
-          titlechange(copy);
-        }}
-      >
-        제목수정
-      </button>
+        <button
+          onClick={() => {
+            let copy = [...글제목];
+            copy[0] = "여자코트 추천";
+            titlechange(copy);
+          }}
+        >
+          제목수정
+        </button>
 
-      {/* <div className="list">
+        {/* <div className="list">
         <h4>
           {글제목[0]}{" "}
           <span
@@ -73,34 +78,35 @@ function App() {
         <p>2월 17일 발행</p>
       </div> */}
 
-      {글제목.map(function (a, i) {
-        return (
-          <div className="list">
-            <h4
-              onClick={() => {
-                setModal(!modal);
-              }}
-            >
-              {글제목[i]}
-              <span
+        {글제목.map(function (a, i) {
+          return (
+            <div className="list">
+              <h4
                 onClick={() => {
-                  let copy = [...따봉];
-                  copy[i] = copy[i] + 1;
-                  bestchange(copy);
+                  setModal(!modal);
                 }}
               >
-                👍
-              </span>
-              {따봉[i]}
-            </h4>
-            <p>2월 17일 발행</p>
-          </div>
-        );
-      })}
-      {modal == true ? (
-        <Modal titlechange={titlechange} 글제목={글제목} />
-      ) : null}
-    </div>
+                {글제목[i]}
+                <span
+                  onClick={() => {
+                    let copy = [...따봉];
+                    copy[i] = copy[i] + 1;
+                    bestchange(copy);
+                  }}
+                >
+                  👍
+                </span>
+                {따봉[i]}
+              </h4>
+              <p>2월 17일 발행</p>
+            </div>
+          );
+        })}
+        {modal == true ? (
+          <Modal titlechange={titlechange} 글제목={글제목} />
+        ) : null}
+      </div>
+    </Router>
   );
 }
 

@@ -15,7 +15,7 @@ div {
 .black-nav {
   display: flex;
   background: black;
-  width: auto;
+  width: 100%;
   color: white;
   padding-left: 20px;
 }
